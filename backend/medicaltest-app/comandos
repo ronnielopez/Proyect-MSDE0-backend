@@ -1,0 +1,7 @@
+
+//crear un modelo de la tabla 
+php artisan make:model "Nombre de la tabla" -a
+
+// crear recurso
+
+php artisan make:resource "Nombre del recurso"
