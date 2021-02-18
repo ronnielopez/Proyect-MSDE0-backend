@@ -3,7 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use App\Http\Controllers\Categoriascontroller;
+use App\Http\Controllers\CategoriasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,5 +33,5 @@ Route::middleware(['auth:sanctum', 'verified'] )->get('/categorias', function ()
     return Inertia::render('Categories/CategoriesView');
 })->name('categorias');
 
-
-Route::middleware('auth:sanctum')->get('/categorias/all' , [Categoriascontroller::class, 'categorias']);
+Route::resource('products', CategoriasController::class)
+    ->middleware(['auth:sanctum', 'verified']);

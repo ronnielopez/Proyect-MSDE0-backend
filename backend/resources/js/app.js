@@ -2,9 +2,20 @@ require('./bootstrap');
 
 // Import modules...
 import { createApp, h } from 'vue';
+import Vue from 'vue';
 import { App as InertiaApp, plugin as InertiaPlugin } from '@inertiajs/inertia-vue3';
+import VueAxios from 'vue-axios';
 
 const el = document.getElementById('app');
+const Swal = require('sweetalert2').default
+
+window.Toast = Swal.mixin({
+    toast: true,
+    position: 'buttom-right',
+    timer: 3500,
+    timerProgressBar: false
+})
+
 
 createApp({
     render: () =>
