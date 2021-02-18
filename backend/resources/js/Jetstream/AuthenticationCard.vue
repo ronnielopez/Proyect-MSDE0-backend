@@ -1,5 +1,5 @@
 <template>
-    <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
+    <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100" style='background-image: url("https://coenfeba.com/wp-content/uploads/2017/01/baja-medica.jpg"); background-size: cover;'>
         <div>
             <slot name="logo" />
         </div>
