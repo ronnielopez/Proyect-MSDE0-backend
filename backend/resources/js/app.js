@@ -10,11 +10,12 @@ const el = document.getElementById('app');
 const Swal = require('sweetalert2').default
 
 window.Toast = Swal.mixin({
-    toast: true,
+    toast: false,
     position: 'buttom-right',
-    timer: 3500,
+    timer: 5000,
     timerProgressBar: false
 })
+
 
 
 createApp({

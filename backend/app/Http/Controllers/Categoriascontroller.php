@@ -34,7 +34,7 @@ class CategoriasController extends Controller
 
         $categoria->save();
 
-        return response ("Successfully guardado" , 201);
+        return response ("Guardado correctamente" , 201);
     }
 
     /**
@@ -66,7 +66,7 @@ class CategoriasController extends Controller
 
         $categoria->save();
 
-        return response ("Successfully guardado" , 201);
+        return response ("Actualizado correctamente" , 201);
     }
 
     /**
@@ -79,6 +79,6 @@ class CategoriasController extends Controller
     {
         Categoria::find($id)->delete();
 
-        return response("Succesfulle delete" , 200);
+        return response("Eliminado correctamente" , 200);
     }
 }

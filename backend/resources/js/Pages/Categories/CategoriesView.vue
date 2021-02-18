@@ -5,37 +5,37 @@
         Categorias
       </h2>
     </template>
-
+  <div v-if="$page.props.user.role === 'administrador'">
     <div class="py-12">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-          <div class="row container py-3">
+          <div class="row py-3 container">
             <div class="col s12 text-right">
               <a
                 type="button"
                 class="btn btn-primary"
                 data-toggle="modal"
                 data-target="#crearModal"
-                >Crear</a
+                >Crear categoria</a
               >
             </div>
           </div>
-          <div class="row container">
+          <div class="row">
             <div class="col 12">
-              <table class="table table-dark">
+              <table class="table">
                 <thead>
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Nombre</th>
                     <th scope="col"></th>
-                    <th scope="col">Accion</th>
+                    <th scope="col" class="text-center">Accion</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr v-for="(categoria, index) in categorias" :key="index">
                     <td scope="row">{{ categoria.id }}</td>
                     <td colspan="2">{{ categoria.nombre }}</td>
-                    <td>
+                    <td class="text-center">
                       <a
                         type="button"
                         class="btn btn-info mr-4"
@@ -147,7 +147,10 @@
       </div>
     </div>
     <!--End modal editar de categoria-->
-
+  </div>
+  <div v-else>
+  Usted no tiene permiso para poder ver esta seccion
+  </div>
   </app-layout>
 </template>
 
@@ -184,6 +187,7 @@ export default {
         document.getElementById("crearForm").reset();
         $("#crearModal").modal("hide");
         this.getCategorias();
+        this.categoria = {};
       }
     },
 
@@ -198,6 +202,7 @@ export default {
         document.getElementById("editarForm").reset();
         $("#editarModal").modal("hide");
         this.getCategorias();
+        this.categoria = {};
       }
     },
 
@@ -221,8 +226,9 @@ export default {
         icon: 'warning',
         text: 'Esta seguro que desea eliminar el registro?',
         showCancelButton: true,
-        confirmButtonText: 'Delete',
+        confirmButtonText: 'Eliminar',
         confirmButtonColor: '#e3342f',
+        cancelButtonText: 'Cancelar'
       }).then((result)=> {
           if (result.isConfirmed) {
             this.deleteCategorias();

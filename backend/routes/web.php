@@ -33,5 +33,5 @@ Route::middleware(['auth:sanctum', 'verified'] )->get('/categorias', function ()
     return Inertia::render('Categories/CategoriesView');
 })->name('categorias');
 
-Route::resource('products', CategoriasController::class)
+Route::resource('categoria', CategoriasController::class)
     ->middleware(['auth:sanctum', 'verified']);
