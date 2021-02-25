@@ -23,7 +23,12 @@
                                 <jet-nav-link v-if="$page.props.user.role === 'administrador'" :href="route('categorias')" :active="route().current('categorias')">
                                     Categorias
                                 </jet-nav-link>
-                                
+                                <jet-nav-link v-if="$page.props.user.role === 'administrador'" :href="route('suscripciones')" :active="route().current('suscripciones')">
+                                    Suscripciones
+                                </jet-nav-link>
+                                <jet-nav-link v-if="$page.props.user.role === 'administrador'" :href="route('comercio')" :active="route().current('comercio')">
+                                    Comercios
+                                </jet-nav-link>
                             </div>
                         </div>
 
@@ -150,6 +155,14 @@
                         
                         <jet-responsive-nav-link v-if="$page.props.user.role === 'administrador'" :href="route('categorias')" :active="route().current('categorias')">
                             Categorias
+                        </jet-responsive-nav-link>
+
+                        <jet-responsive-nav-link v-if="$page.props.user.role === 'administrador'" :href="route('suscripciones')" :active="route().current('suscripciones')">
+                            Suscripciones
+                        </jet-responsive-nav-link>
+
+                        <jet-responsive-nav-link v-if="$page.props.user.role === 'administrador'" :href="route('comercio')" :active="route().current('comercio')">
+                            Comercios
                         </jet-responsive-nav-link>
                         
                     </div>

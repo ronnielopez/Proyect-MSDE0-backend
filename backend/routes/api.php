@@ -21,3 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::apiResource('categoria' , 'App\Http\Controllers\CategoriasController');
+
+Route::apiResource('suscripcion' , 'App\Http\Controllers\SuscripcionesController');
+
+Route::apiResource('comercio' , 'App\Http\Controllers\ComercioController');

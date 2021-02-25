@@ -4,6 +4,8 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\CategoriasController;
+use App\Http\Controllers\SuscripcionesController;
+use App\Http\Controllers\ComercioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,4 +31,18 @@ Route::middleware(['auth:sanctum', 'verified'] )->get('/categorias', function ()
 })->name('categorias');
 
 Route::resource('categoria', CategoriasController::class)
+    ->middleware(['auth:sanctum', 'verified']);
+
+Route::middleware(['auth:sanctum', 'verified'] )->get('/suscripciones', function () {
+    return Inertia::render('Suscripciones/SuscripcionesView');
+})->name('suscripciones');
+    
+Route::resource('suscripcion', SuscripcionesController::class)
+    ->middleware(['auth:sanctum', 'verified']);
+
+Route::middleware(['auth:sanctum', 'verified'] )->get('/comercio', function () {
+    return Inertia::render('Comercios/ComercioView');
+})->name('comercio');
+        
+Route::resource('comercios', ComercioController::class)
     ->middleware(['auth:sanctum', 'verified']);

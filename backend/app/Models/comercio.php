@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Categoria extends Model
+class comercio extends Model
 {
     use HasFactory;
 
@@ -16,6 +16,10 @@ class Categoria extends Model
      */
     
     protected $fillable = [
-        'nombre'
+        "nombre",
+        "direccion",
+        "telefono",
+        "rubro"
     ];
+
 }
