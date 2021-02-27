@@ -26,7 +26,7 @@
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Nombre</th>
+                    <th scope="col">Nombres</th>
                     <th scope="col"></th>
                     <th scope="col" class="text-center">Accion</th>
                   </tr>
