@@ -25,3 +25,5 @@ Route::apiResource('categoria' , 'App\Http\Controllers\CategoriasController');
 Route::apiResource('suscripcion' , 'App\Http\Controllers\SuscripcionesController');
 
 Route::apiResource('comercio' , 'App\Http\Controllers\ComercioController');
+
+//Route::apiResource('comercio' , 'App\Http\Controllers\ComercioController')->middleware('auth:sanctum');

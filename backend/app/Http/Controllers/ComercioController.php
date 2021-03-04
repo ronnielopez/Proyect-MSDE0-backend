@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\comercio;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ComercioController extends Controller
@@ -108,7 +109,7 @@ class ComercioController extends Controller
      * @param  \App\Models\comercio  $comercio
      * @return \Illuminate\Http\Response
      */
-    public function destroy(comercio $comercio)
+    public function destroy($id)
     {
         comercio::find($id)->delete();
 

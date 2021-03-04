@@ -46,3 +46,7 @@ Route::middleware(['auth:sanctum', 'verified'] )->get('/comercio', function () {
         
 Route::resource('comercios', ComercioController::class)
     ->middleware(['auth:sanctum', 'verified']);
+
+Route::middleware(['auth:sanctum', 'verified'] )->get('/usuarios', function () {
+    return Inertia::render('Usuarios/UsuariosView');
+})->name('usuarios');
