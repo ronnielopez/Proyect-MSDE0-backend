@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controller\CategoriasController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,10 +20,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::apiResource('categoria' , 'App\Http\Controllers\CategoriasController');
+Route::apiResource('categoria' , 'App\Http\Controllers\CategoriasController')->middleware('auth:sanctum');
 
-Route::apiResource('suscripcion' , 'App\Http\Controllers\SuscripcionesController');
+Route::apiResource('suscripcion' , 'App\Http\Controllers\SuscripcionesController')->middleware('auth:sanctum');
 
-Route::apiResource('comercio' , 'App\Http\Controllers\ComercioController');
+Route::apiResource('comercio' , 'App\Http\Controllers\ComercioController')->middleware('auth:sanctum');
 
-//Route::apiResource('comercio' , 'App\Http\Controllers\ComercioController')->middleware('auth:sanctum');
+Route::apiResource('usuarios' , 'App\Http\Controllers\UserController')->middleware('auth:sanctum');

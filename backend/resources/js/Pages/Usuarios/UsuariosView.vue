@@ -16,7 +16,7 @@
                 class="btn btn-primary"
                 data-toggle="modal"
                 data-target="#crearModal"
-                >Crear categoria</a
+                >Crear usuario</a
               >
             </div>
           </div>
@@ -26,28 +26,32 @@
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Nombres</th>
-                    <th scope="col"></th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Rol</th>
                     <th scope="col" class="text-center">Accion</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="(categoria, index) in categorias" :key="index">
-                    <td scope="row">{{ categoria.id }}</td>
-                    <td colspan="2">{{ categoria.nombre }}</td>
+                  <tr v-for="(usuario, index) in usuarios" :key="index" >
+                    <td scope="row">{{ usuario.id }}</td>
+                    <td>{{ usuario.name }}</td>
+                    <td>{{ usuario.email }}</td>
+                    <td>{{ usuario.role }}</td>
                     <td class="text-center">
                       <a
                         type="button"
                         class="btn btn-info mr-4"
                         data-toggle="modal"
                         data-target="#editarModal"
-                        @click="selectedCategoria(categoria)"
+                        @click="selectedUsuario(usuario)"
                         >Editar</a
                       >
                       <a
+                        v-if="$page.props.user.id != usuario.id"
                         type="button"
                         class="btn btn-danger"
-                        @click="selectedCategoria(categoria); confirmDelete();"
+                        @click="selectedUsuario(usuario); confirmDelete();"
                         >Eliminar</a
                       >
                     </td>
@@ -85,16 +89,44 @@
             </button>
           </div>
           <div class="modal-body">
-            <form id="crearForm" @submit.prevent="addCategorias">
+            <form id="crearForm" @submit.prevent="addUsuario">
               <div class="form-group">
-                <label for="nombre">Nombre de la categoria</label>
+                <label for="nombre">Nombre de usuario</label>
                 <input
                   type="text"
-                  v-model="categoria.nombre"
+                  v-model="usuario.name"
                   class="form-control"
                   id="nombre"
-                  placeholder="Categoria"
+                  placeholder="Nombre"
                 />
+              </div>
+              <div class="form-group">
+                <label for="email">Correo electronico</label>
+                <input
+                  type="text"
+                  v-model="usuario.email"
+                  class="form-control"
+                  id="email"
+                  placeholder="Email"
+                />
+              </div>
+              <div class="form-group">
+                <label for="email">Contraseña</label>
+                <input
+                  type="password"
+                  v-model="usuario.password"
+                  class="form-control"
+                  id="password"
+                  placeholder="Contraseña"
+                />
+              </div>
+              <div class="form-group">
+              <label for="rubro">Rol</label>
+                <select v-model="usuario.role" class="form-control" name="rol" id="rol">
+                  <option selected disabled>Seleccione un rol</option>
+                  <option value="administrador">Administrador</option>
+                  <option value="cliente">Cliente</option>
+                </select>
               </div>
               <button type="submit" class="btn btn-primary">Crear</button>
             </form>
@@ -117,7 +149,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">
-              Modificar una categoria
+              Modificar usuario
             </h5>
             <button
               type="button"
@@ -129,16 +161,44 @@
             </button>
           </div>
           <div class="modal-body">
-            <form id="editarForm" @submit.prevent="editCategorias">
+            <form id="editarForm" @submit.prevent="editUsuario">
               <div class="form-group">
-                <label for="nombre">Nombre de la categoria</label>
+                <label for="nombre">Nombre de usuario</label>
                 <input
                   type="text"
-                  v-model="slcCategoria.nombre"
+                  v-model="slcUsuario.name"
                   class="form-control"
                   id="nombre"
-                  placeholder="Categoria"
+                  placeholder="Nombre"
                 />
+              </div>
+              <div class="form-group">
+                <label for="email">Correo electronico</label>
+                <input
+                  type="text"
+                  v-model="slcUsuario.email"
+                  class="form-control"
+                  id="email"
+                  placeholder="Email"
+                />
+              </div>
+              <div class="form-group">
+                <label for="email">Contraseña</label>
+                <input
+                  type="password"
+                  v-model="slcUsuario.password"
+                  class="form-control"
+                  id="password"
+                  placeholder="Contraseña"
+                />
+              </div>
+              <div class="form-group">
+              <label for="rubro">Rol</label>
+                <select v-model="slcUsuario.role" class="form-control" name="rol" id="rol">
+                  <option selected disabled>Seleccione un rol</option>
+                  <option value="administrador">Administrador</option>
+                  <option value="cliente">Cliente</option>
+                </select>
               </div>
               <button type="submit" class="btn btn-warning">Editar</button>
             </form>
@@ -163,21 +223,24 @@ export default {
   },
   data() {
     return {
-      categorias: [],
-      categoria: {
-        nombre: "",
+      usuarios: [],
+      usuario: {
+        name: "",
+        email: "",
+        password: "",
+        role: ""
       },
-      slcCategoria: {},
+      slcUsuario: {},
     };
   },
   methods: {
-    async getCategorias() {
-      const { data } = await axios.get("api/categoria");
-      this.categorias = data;
+    async getUsuarios() {
+      const { data } = await axios.get("usuario", this.config);
+      this.usuarios = data;
     },
 
-    async addCategorias() {
-      const res = await axios.post("api/categoria", this.categoria);
+    async addUsuario() {
+      const res = await axios.post("usuario", this.usuario , this.config);
       if (res.status === 201) {
         Toast.fire({
           icon: "success",
@@ -186,13 +249,13 @@ export default {
 
         document.getElementById("crearForm").reset();
         $("#crearModal").modal("hide");
-        this.getCategorias();
-        this.categoria = {};
+        this.getUsuarios();
+        this.usuarios = {};
       }
     },
 
-    async editCategorias() {
-      const res = await axios.put("api/categoria/"+this.slcCategoria.id, this.slcCategoria);
+    async editUsuario() {
+      const res = await axios.put("usuario/" + this.slcUsuario.id, this.slcUsuario , this.config);
       if (res.status === 201) {
         Toast.fire({
           icon: "success",
@@ -201,13 +264,13 @@ export default {
 
         document.getElementById("editarForm").reset();
         $("#editarModal").modal("hide");
-        this.getCategorias();
-        this.categoria = {};
+        this.getUsuarios();
+        this.usuarios = {};
       }
     },
 
-    async deleteCategorias() {
-      const res = await axios.delete("api/categoria/"+this.slcCategoria.id);
+    async deleteUsuario() {
+      const res = await axios.delete("usuario/" + this.slcUsuario.id , this.config);
       if (res.status === 201) {
         Toast.fire({
           icon: "success",
@@ -216,9 +279,9 @@ export default {
       }
     },
 
-    selectedCategoria(categoria){
-      let notReactive = JSON.stringify(categoria);
-      this.slcCategoria = JSON.parse(notReactive);
+    selectedUsuario(usuario){
+      let notReactive = JSON.stringify(usuario);
+      this.slcUsuario = JSON.parse(notReactive);
     },
 
     confirmDelete: function(){
@@ -231,14 +294,29 @@ export default {
         cancelButtonText: 'Cancelar'
       }).then((result)=> {
           if (result.isConfirmed) {
-            this.deleteCategorias();
-            this.getCategorias();
+            this.deleteUsuario();
+            this.getUsuarios();
           }
       });
     }
   },
   created() {
-    this.getCategorias();
+    this.getUsuarios();
   },
+  computed: {
+    config(){
+      let token = null;
+      var match = document.cookie.match(new RegExp('(^| )' + 'XSRF-TOKEN' + '=([^;]+)'));
+      if (match) {
+        token = match[2];
+      }
+      else{
+        return false;
+      }
+      return {
+          headers: { Authorization: `${token}` }
+      };
+    }
+  }
 };
 </script>

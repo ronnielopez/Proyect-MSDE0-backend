@@ -237,13 +237,13 @@ export default {
   },
   methods: {
     async getSuscripciones() {
-      const { data } = await axios.get("api/suscripcion");
+      const { data } = await axios.get("suscripcion" , this.config);
       this.suscripciones = data;
       this.contador = this.suscripciones.length;
     },
 
     async addSuscripcion() {
-      const res = await axios.post("api/suscripcion", this.suscripcion);
+      const res = await axios.post("suscripcion", this.suscripcion , this.config);
       if (res.status === 201) {
         Toast.fire({
           icon: "success",
@@ -258,7 +258,7 @@ export default {
     },
 
     async editSuscripciones() {
-      const res = await axios.put("api/suscripcion/"+this.slcSuscripcion.id, this.slcSuscripcion);
+      const res = await axios.put("suscripcion/"+this.slcSuscripcion.id, this.slcSuscripcion, this.config);
       if (res.status === 201) {
         Toast.fire({
           icon: "success",
@@ -273,7 +273,7 @@ export default {
     },
 
     async deleteSuscripcion() {
-      const res = await axios.delete("api/suscripcion/"+this.slcSuscripcion.id);
+      const res = await axios.delete("suscripcion/"+this.slcSuscripcion.id , this.config);
       if (res.status === 201) {
         Toast.fire({
           icon: "success",
@@ -306,5 +306,20 @@ export default {
   created() {
     this.getSuscripciones();
   },
+  computed: {
+    config(){
+      let token = null;
+      var match = document.cookie.match(new RegExp('(^| )' + 'XSRF-TOKEN' + '=([^;]+)'));
+      if (match) {
+        token = match[2];
+      }
+      else{
+        return false;
+      }
+      return {
+          headers: { Authorization: `${token}` }
+      };
+    }
+  }
 };
 </script>

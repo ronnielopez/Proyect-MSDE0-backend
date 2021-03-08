@@ -172,12 +172,12 @@ export default {
   },
   methods: {
     async getCategorias() {
-      const { data } = await axios.get("api/categoria");
+      const { data } = await axios.get("categoria" , this.config);
       this.categorias = data;
     },
 
     async addCategorias() {
-      const res = await axios.post("api/categoria", this.categoria);
+      const res = await axios.post("categoria", this.categoria , this.config);
       if (res.status === 201) {
         Toast.fire({
           icon: "success",
@@ -192,7 +192,7 @@ export default {
     },
 
     async editCategorias() {
-      const res = await axios.put("api/categoria/"+this.slcCategoria.id, this.slcCategoria);
+      const res = await axios.put("categoria/"+this.slcCategoria.id, this.slcCategoria , this.config);
       if (res.status === 201) {
         Toast.fire({
           icon: "success",
@@ -207,7 +207,7 @@ export default {
     },
 
     async deleteCategorias() {
-      const res = await axios.delete("api/categoria/"+this.slcCategoria.id);
+      const res = await axios.delete("categoria/"+this.slcCategoria.id , this.config);
       if (res.status === 201) {
         Toast.fire({
           icon: "success",
@@ -240,5 +240,20 @@ export default {
   created() {
     this.getCategorias();
   },
+  computed: {
+    config(){
+      let token = null;
+      var match = document.cookie.match(new RegExp('(^| )' + 'XSRF-TOKEN' + '=([^;]+)'));
+      if (match) {
+        token = match[2];
+      }
+      else{
+        return false;
+      }
+      return {
+          headers: { Authorization: `${token}` }
+      };
+    }
+  }
 };
 </script>

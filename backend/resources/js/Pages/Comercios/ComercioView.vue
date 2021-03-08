@@ -241,16 +241,16 @@ export default {
       /*const config = {
         headers: { Authorization: `Bearer 1|9vOuZx3R5eSc5rv7VpA0JKJUZUEOoK78lbMp9t2e` }
         };*/
-      const { data } = await axios.get("api/comercio");
+      const { data } = await axios.get("comercios" , this.config);
       this.comercios = data;
     },
     async getCategorias() {
-      const { data } = await axios.get("api/categoria");
+      const { data } = await axios.get("categoria" , this.config);
       this.categorias = data;
     },
 
     async addComercio() {
-      const res = await axios.post("api/comercio", this.comercio);
+      const res = await axios.post("comercios", this.comercio , this.config);
       if (res.status === 201) {
         Toast.fire({
           icon: "success",
@@ -265,7 +265,7 @@ export default {
     },
 
     async editComercio() {
-      const res = await axios.put("api/comercio/"+this.slcComercio.id, this.slcComercio);
+      const res = await axios.put("comercios/"+this.slcComercio.id, this.slcComercio , this.config);
       if (res.status === 201) {
         Toast.fire({
           icon: "success",
@@ -280,7 +280,7 @@ export default {
     },
 
     async deleteComercio() {
-      const res = await axios.delete("api/comercio/"+this.slcComercio.id);
+      const res = await axios.delete("comercios/"+this.slcComercio.id , this.config);
       if (res.status === 201) {
         Toast.fire({
           icon: "success",
@@ -315,5 +315,20 @@ export default {
     this.getCategorias(),
     this.getComercio()
   },
+  computed: {
+    config(){
+      let token = null;
+      var match = document.cookie.match(new RegExp('(^| )' + 'XSRF-TOKEN' + '=([^;]+)'));
+      if (match) {
+        token = match[2];
+      }
+      else{
+        return false;
+      }
+      return {
+          headers: { Authorization: `${token}` }
+      };
+    }
+  }
 };
 </script>
