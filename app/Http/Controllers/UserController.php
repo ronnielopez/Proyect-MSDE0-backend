@@ -30,6 +30,7 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required',
             'password' => 'required',
+            'estado' => 'required',
             'role' => 'required'
         ]);
 
@@ -37,6 +38,7 @@ class UserController extends Controller
         $usuario->name = $request->name;
         $usuario->email = $request->email;
         $usuario->password = Hash::make($request->password);
+        $usuario->estado = $request->estado;
         $usuario->role = $request->role;
 
         $usuario->save();
@@ -68,6 +70,7 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required',
             'password' => 'required',
+            'estado' => 'required',
             'role' => 'required'
         ]);
 
@@ -75,6 +78,7 @@ class UserController extends Controller
         $usuario->name = $request->name;
         $usuario->email = $request->email;
         $usuario->password = Hash::make($request->password);
+        $usuario->estado = $request->estado;
         $usuario->role = $request->role;
 
         $usuario->save();

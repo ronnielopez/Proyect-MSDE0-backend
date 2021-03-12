@@ -28,6 +28,7 @@ class UserFactory extends Factory
             'role' => 'administrador',
             'email_verified_at' => now(),
             'password' => '$2y$10$8z0NPSzpOJpXGJNd8EB1cuZbm8ASU.W3W7hsflVF5oDfsDirTjX0a', // password
+            'estado' => '3',
             'remember_token' => Str::random(10),
         ];
     }

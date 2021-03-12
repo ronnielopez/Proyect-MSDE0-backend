@@ -28,6 +28,7 @@
                     <th scope="col">#</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Email</th>
+                    <th scope="col">Estado</th>
                     <th scope="col">Rol</th>
                     <th scope="col" class="text-center">Accion</th>
                   </tr>
@@ -37,6 +38,11 @@
                     <td scope="row">{{ usuario.id }}</td>
                     <td>{{ usuario.name }}</td>
                     <td>{{ usuario.email }}</td>
+                    <td v-if="usuario.estado === '1'" class='text-danger'>Incompleto</td>
+                    <td v-else-if="usuario.estado === '2'" class='text-success'>Completo</td>
+                    <td v-else-if="usuario.estado === '3'" class='text-primary'>Standar</td>
+                    <td v-else-if="usuario.estado === '4'" class='text-info'>Gold</td>
+                    <td v-else="usuario.estado === '5'" class='text-warning'>Premium</td>
                     <td>{{ usuario.role }}</td>
                     <td class="text-center">
                       <a
@@ -121,6 +127,17 @@
                 />
               </div>
               <div class="form-group">
+              <label for="estado">Estado</label>
+                <select v-model="usuario.estado" class="form-control" name="estado" id="estado">
+                  <option selected disabled>Seleccione un estado</option>
+                  <option value="1">Incompleto</option>
+                  <option value="2">Completo</option>
+                  <option value="3">Estandar</option>
+                  <option value="4">Gold</option>
+                  <option value="5">Premium</option>
+                </select>
+              </div>
+              <div class="form-group">
               <label for="rubro">Rol</label>
                 <select v-model="usuario.role" class="form-control" name="rol" id="rol">
                   <option selected disabled>Seleccione un rol</option>
@@ -193,6 +210,17 @@
                 />
               </div>
               <div class="form-group">
+              <label for="estado">Estado</label>
+                <select v-model="slcUsuario.estado" class="form-control" name="estado" id="estado">
+                  <option selected disabled>Seleccione un estado</option>
+                  <option value="1">Incompleto</option>
+                  <option value="2">Completo</option>
+                  <option value="3">Estandar</option>
+                  <option value="4">Gold</option>
+                  <option value="5">Premium</option>
+                </select>
+              </div>
+              <div class="form-group">
               <label for="rubro">Rol</label>
                 <select v-model="slcUsuario.role" class="form-control" name="rol" id="rol">
                   <option selected disabled>Seleccione un rol</option>
@@ -227,6 +255,7 @@ export default {
       usuario: {
         name: "",
         email: "",
+        estado:"",
         password: "",
         role: ""
       },
