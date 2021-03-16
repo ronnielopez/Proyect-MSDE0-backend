@@ -21,6 +21,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('login' , 'App\Http\Controllers\AuthController@index');
 
+Route::post('registrar' , 'App\Http\Controllers\AuthController@registrar');
+
 Route::apiResource('categoria' , 'App\Http\Controllers\CategoriasController')->middleware('auth:sanctum');
 
 Route::apiResource('suscripcion' , 'App\Http\Controllers\SuscripcionesController')->middleware('auth:sanctum');

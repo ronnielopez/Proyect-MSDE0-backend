@@ -27,4 +27,24 @@ class AuthController extends Controller
         
              return response($response, 201);
     }
+
+    function registrar(Request $request)
+    {
+        $this->validate($request , [
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required'
+        ]);
+
+        $usuario = new User;
+        $usuario->name = $request->name;
+        $usuario->email = $request->email;
+        $usuario->password = Hash::make($request->password);
+
+
+        $usuario->save();
+
+        return response ("Guardado correctamente" , 201);
+
+    }
 }
