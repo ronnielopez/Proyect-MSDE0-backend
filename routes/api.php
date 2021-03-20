@@ -15,18 +15,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/*Route::get('/token', function (Request $request) {
+    $token = $request->session()->token();
+    $token = csrf_token();
+    return $token;
+});*/
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+//auth routes
 Route::post('login' , 'App\Http\Controllers\AuthController@index');
-
 Route::post('registrar' , 'App\Http\Controllers\AuthController@registrar');
+Route::put('planes/{planes}' , 'App\Http\Controllers\AuthController@planes')->middleware('auth:sanctum');
+
+//frontend routes
+Route::get('planes' , 'App\Http\Controllers\SuscripcionesController@index');
+
 
 Route::apiResource('categoria' , 'App\Http\Controllers\CategoriasController')->middleware('auth:sanctum');
-
 Route::apiResource('suscripcion' , 'App\Http\Controllers\SuscripcionesController')->middleware('auth:sanctum');
-
 Route::apiResource('comercio' , 'App\Http\Controllers\ComercioController')->middleware('auth:sanctum');
-
 Route::apiResource('usuarios' , 'App\Http\Controllers\UserController')->middleware('auth:sanctum');

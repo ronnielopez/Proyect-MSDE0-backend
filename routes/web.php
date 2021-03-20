@@ -7,6 +7,7 @@ use App\Http\Controllers\CategoriasController;
 use App\Http\Controllers\SuscripcionesController;
 use App\Http\Controllers\ComercioController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ClinicasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,4 +54,12 @@ Route::middleware(['auth:sanctum', 'verified'] )->get('/usuarios', function () {
 })->name('usuarios');
 
 Route::resource('usuario', UserController::class)
+    ->middleware(['auth:sanctum', 'verified']);
+
+    
+Route::middleware(['auth:sanctum', 'verified'] )->get('/clinicas', function () {
+        return Inertia::render('Clinicas/ClinicaView');
+})->name('clinicas');
+    
+Route::resource('clinica', ClinicasController::class)
     ->middleware(['auth:sanctum', 'verified']);

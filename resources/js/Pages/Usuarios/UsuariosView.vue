@@ -40,7 +40,7 @@
                     <td>{{ usuario.email }}</td>
                     <td v-if="usuario.estado === '1'" class='text-danger'>Incompleto</td>
                     <td v-else-if="usuario.estado === '2'" class='text-success'>Completo</td>
-                    <td v-else-if="usuario.estado === '3'" class='text-primary'>Standar</td>
+                    <td v-else-if="usuario.estado === '3'" class='text-muted'>Standar</td>
                     <td v-else-if="usuario.estado === '4'" class='text-info'>Gold</td>
                     <td v-else="usuario.estado === '5'" class='text-warning'>Premium</td>
                     <td>{{ usuario.role }}</td>

@@ -40,6 +40,9 @@ class SuscripcionesController extends Controller
             'subtitulo' => 'required',
             'precio' => 'required',
             'descripcion' => 'required',
+            'beneficio1' => 'required',
+            'beneficio2' => 'required',
+            'beneficio3' => 'required',
         ]);
 
         $suscripciones = new suscripciones;
@@ -47,6 +50,9 @@ class SuscripcionesController extends Controller
         $suscripciones->subtitulo = $request->subtitulo;
         $suscripciones->precio = $request->precio;
         $suscripciones->descripcion = $request->descripcion;
+        $suscripciones->beneficio1 = $request->beneficio1;
+        $suscripciones->beneficio2 = $request->beneficio2;
+        $suscripciones->beneficio3 = $request->beneficio3;
 
         $suscripciones->save();
 
@@ -84,11 +90,14 @@ class SuscripcionesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        this->validate($request , [
+        $this->validate($request , [
             'nombre' => 'required',
             'subtitulo' => 'required',
             'precio' => 'required',
             'descripcion' => 'required',
+            'beneficio1' => 'required',
+            'beneficio2' => 'required',
+            'beneficio3' => 'required'
         ]);
 
         $suscripciones = suscripciones::find($id);
@@ -96,6 +105,9 @@ class SuscripcionesController extends Controller
         $suscripciones->subtitulo = $request->subtitulo;
         $suscripciones->precio = $request->precio;
         $suscripciones->descripcion = $request->descripcion;
+        $suscripciones->beneficio1 = $request->beneficio1;
+        $suscripciones->beneficio2 = $request->beneficio2;
+        $suscripciones->beneficio3 = $request->beneficio3;
 
         $suscripciones->save();
 

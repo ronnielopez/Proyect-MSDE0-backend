@@ -47,4 +47,18 @@ class AuthController extends Controller
         return response ("Guardado correctamente" , 201);
 
     }
+
+    function planes(Request $request, $id)
+    {
+        $this->validate($request , [
+            'estado' => 'required'
+        ]);
+
+        $usuario = User::find($id);
+        $usuario->estado = $request->estado;
+        $usuario->save();
+
+        return response ("Actualizado correctamente" , 201);
+
+    }
 }

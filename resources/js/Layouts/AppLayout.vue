@@ -29,6 +29,9 @@
                                 <jet-nav-link v-if="$page.props.user.role === 'administrador'" :href="route('comercio')" :active="route().current('comercio')">
                                     Comercios
                                 </jet-nav-link>
+                                <jet-nav-link v-if="$page.props.user.role === 'administrador'" :href="route('clinicas')" :active="route().current('clinicas')">
+                                    Clinicas
+                                </jet-nav-link>
                                 <jet-nav-link v-if="$page.props.user.role === 'administrador'" :href="route('usuarios')" :active="route().current('usuarios')">
                                     Usuarios
                                 </jet-nav-link>
@@ -166,6 +169,10 @@
 
                         <jet-responsive-nav-link v-if="$page.props.user.role === 'administrador'" :href="route('comercio')" :active="route().current('comercio')">
                             Comercios
+                        </jet-responsive-nav-link>
+
+                        <jet-responsive-nav-link v-if="$page.props.user.role === 'administrador'" :href="route('clinicas')" :active="route().current('clinicas')">
+                            Clinicas
                         </jet-responsive-nav-link>
 
                         <jet-responsive-nav-link v-if="$page.props.user.role === 'administrador'" :href="route('usuarios')" :active="route().current('usuarios')">

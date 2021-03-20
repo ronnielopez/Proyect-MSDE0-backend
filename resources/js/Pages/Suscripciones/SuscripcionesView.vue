@@ -122,6 +122,36 @@
                   placeholder="precio"
                 />
               </div>
+               <div class="form-group">
+                <label for="nombre">Beneficio 1</label>
+                <input
+                  type="text"
+                  v-model="suscripcion.beneficio1"
+                  class="form-control"
+                  id="beneficio1"
+                  placeholder="Beneficio 1"
+                />
+              </div>
+              <div class="form-group">
+                <label for="nombre">Beneficio 2</label>
+                <input
+                  type="text"
+                  v-model="suscripcion.beneficio2"
+                  class="form-control"
+                  id="beneficio2"
+                  placeholder="Beneficio 2"
+                />
+              </div>
+              <div class="form-group">
+                <label for="nombre">Beneficio 3</label>
+                <input
+                  type="text"
+                  v-model="suscripcion.beneficio3"
+                  class="form-control"
+                  id="beneficio3"
+                  placeholder="Beneficio 3"
+                />
+              </div>
               <div class="form-group">
                 <label for="descripcion">Descripcion</label>
                 <textarea class="form-control" 
@@ -195,6 +225,36 @@
                 />
               </div>
               <div class="form-group">
+                <label for="nombre">Beneficio 1</label>
+                <input
+                  type="text"
+                  v-model="slcSuscripcion.beneficio1"
+                  class="form-control"
+                  id="beneficio1"
+                  placeholder="Beneficio 1"
+                />
+              </div>
+              <div class="form-group">
+                <label for="nombre">Beneficio 2</label>
+                <input
+                  type="text"
+                  v-model="slcSuscripcion.beneficio2"
+                  class="form-control"
+                  id="beneficio2"
+                  placeholder="Beneficio 2"
+                />
+              </div>
+              <div class="form-group">
+                <label for="nombre">Beneficio 3</label>
+                <input
+                  type="text"
+                  v-model="slcSuscripcion.beneficio3"
+                  class="form-control"
+                  id="beneficio3"
+                  placeholder="Beneficio 3"
+                />
+              </div>
+              <div class="form-group">
                 <label for="descripcion">Descripcion</label>
                 <textarea class="form-control" 
                 id="descripcion" 
@@ -230,7 +290,10 @@ export default {
         nombre: "",
         subtitulo:"",
         precio:"",
-        descripcion:""
+        descripcion:"",
+        beneficio1:"",
+        beneficio2:"",
+        beneficio3:"",
       },
       slcSuscripcion: {},
     };

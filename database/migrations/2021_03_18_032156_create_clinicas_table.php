@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSuscripcionesTable extends Migration
+class CreateClinicasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,16 @@ class CreateSuscripcionesTable extends Migration
      */
     public function up()
     {
-        Schema::create('suscripciones', function (Blueprint $table) {
+        Schema::create('clinicas', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre',20);
-            $table->string('subtitulo',50);
-            $table->decimal('precio',8,2);
+            $table->string('nombre',40);
+            $table->string('subDescripcion');
             $table->string('descripcion');
-            $table->string('beneficio1');
-            $table->string('beneficio2');
-            $table->string('beneficio3');
+            $table->string('apr1');
+            $table->string('apr2');
+            $table->string('userId');
+            $table->string('categoriaId');
+            $table->string('estado')->default('2');
             $table->timestamps();
         });
     }
@@ -33,6 +34,6 @@ class CreateSuscripcionesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('suscripciones');
+        Schema::dropIfExists('clinicas');
     }
 }
