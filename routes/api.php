@@ -32,6 +32,7 @@ Route::put('planes/{planes}' , 'App\Http\Controllers\AuthController@planes')->mi
 
 //frontend routes
 Route::get('planes' , 'App\Http\Controllers\SuscripcionesController@index');
+Route::get('clinicas' , 'App\Http\Controllers\ClinicasController@index');
 
 
 Route::apiResource('categoria' , 'App\Http\Controllers\CategoriasController')->middleware('auth:sanctum');

@@ -8,6 +8,7 @@ use App\Http\Controllers\SuscripcionesController;
 use App\Http\Controllers\ComercioController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ClinicasController;
+use App\Http\Controllers\SucursalesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,4 +63,8 @@ Route::middleware(['auth:sanctum', 'verified'] )->get('/clinicas', function () {
 })->name('clinicas');
     
 Route::resource('clinica', ClinicasController::class)
+    ->middleware(['auth:sanctum', 'verified']);
+
+
+Route::resource('sucursal', SucursalesController::class)
     ->middleware(['auth:sanctum', 'verified']);

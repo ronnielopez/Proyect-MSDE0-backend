@@ -15,6 +15,14 @@ class CreateSucursalesTable extends Migration
     {
         Schema::create('sucursales', function (Blueprint $table) {
             $table->id();
+            $table->string('nombre');
+            $table->string('ubicacion');
+            $table->string('puntosReferencia')->nullable();
+            $table->string('horarioI');
+            $table->string('horarioF');
+            $table->string('descripcion');
+            $table->string('clinicaId');
+            $table->string('estado')->default("2");
             $table->timestamps();
         });
     }

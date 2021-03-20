@@ -50,7 +50,13 @@
                                                 {{ clinica.subDescripcion }}
                                             </td>
                                             <td>{{ clinica.descripcion }}</td>
-                                            <td>{{ clinica.estado == 2 ? 'Activo' : 'Desabilitado' }}</td>
+                                            <td>
+                                                {{
+                                                    clinica.estado == 2
+                                                        ? "Activo"
+                                                        : "Desabilitado"
+                                                }}
+                                            </td>
                                             <td class="text-center">
                                                 <a
                                                     type="button"
@@ -58,7 +64,7 @@
                                                     data-toggle="modal"
                                                     data-target="#editarModal"
                                                     @click="
-                                                        selectedClinica(clinica);
+                                                        selectedClinica(clinica)
                                                     "
                                                     >Editar</a
                                                 >
@@ -192,7 +198,7 @@
                                     </select>
                                 </div>
 
-                                 <div class="form-group">
+                                <div class="form-group">
                                     <label for="categoria">Categoria</label>
                                     <select
                                         v-model="clinica.categoriaId"
@@ -224,12 +230,8 @@
                                         <option selected disabled>
                                             Seleccione una estado
                                         </option>
-                                        <option value="1">
-                                            Desabilitado
-                                        </option>
-                                        <option value="2">
-                                            Activo
-                                        </option>
+                                        <option value="1">Desabilitado</option>
+                                        <option value="2">Activo</option>
                                     </select>
                                 </div>
 
@@ -380,12 +382,8 @@
                                         <option selected disabled>
                                             Seleccione una estado
                                         </option>
-                                        <option value="1">
-                                            Desabilitado
-                                        </option>
-                                        <option value="2">
-                                            Activo
-                                        </option>
+                                        <option value="1">Desabilitado</option>
+                                        <option value="2">Activo</option>
                                     </select>
                                 </div>
                                 <button type="submit" class="btn btn-warning">
@@ -423,14 +421,17 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                         <a
-                                    type="button"
-                                    class="btn btn-primary my-2"
-                                    v-if="crearSucbtn == false"
-                                    @click="
-                                    "
-                                    >Crear sucursal</a
-                                >
+                            <a
+                                type="button"
+                                class="btn btn-primary my-2"
+                                v-if="crearSucbtn == false"
+                                @click="
+                                    crearSuc = true;
+                                    crearSucbtn = true;
+                                    editarSucSec = true;
+                                "
+                                >Crear sucursal</a
+                            >
                             <div class="row">
                                 <div class="col 12">
                                     <table
@@ -452,20 +453,21 @@
                                         <tbody>
                                             <tr
                                                 v-for="(
-                                                    clinica, index
-                                                ) in clinicas"
+                                                    sucursal, index
+                                                ) in sucursales"
                                                 :key="index"
                                             >
                                                 <td scope="row">
-                                                    {{ clinica.id }}
+                                                    {{ sucursal.id }}
                                                 </td>
-                                                <td>{{ clinica.nombre }}</td>
+                                                <td>{{ sucursal.nombre }}</td>
                                                 <td class="text-center">
                                                     <a
                                                         type="button"
                                                         class="btn btn-info mr-4"
                                                         @click="
-                                                            
+                                                            editarSucSec = true;
+                                                            crearSucbtn = true;
                                                         "
                                                         >Editar</a
                                                     >
@@ -473,10 +475,7 @@
                                                         type="button"
                                                         class="btn btn-danger"
                                                         @click="
-                                                            selectedClinica(
-                                                                clinica
-                                                            );
-                                                            confirmDelete();
+                                                            
                                                         "
                                                         >Eliminar</a
                                                     >
@@ -484,33 +483,34 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <div v-else-if="crearSucbtn">
+                                    <div v-else-if="crearSuc">
                                         <button
                                             type="button"
                                             class="close"
                                             @click="
-                                          
-                                            ">
+                                                crearSuc = false;
+                                                crearSucbtn = false;
+                                                editarSucSec = false;
+                                            "
+                                        >
                                             <span aria-hidden="true"
                                                 >&times;</span
                                             >
                                         </button>
-
-
                                     </div>
                                     <div v-else>
                                         <button
                                             type="button"
                                             class="close"
                                             @click="
-                                           
-                                            ">
+                                                crearSucbtn = false;
+                                                editarSucSec = false;
+                                            "
+                                        >
                                             <span aria-hidden="true"
                                                 >&times;</span
                                             >
                                         </button>
-
-
                                     </div>
                                 </div>
                             </div>
@@ -540,6 +540,17 @@ export default {
             editarSucSec: false,
             crearSuc: false,
             crearSucbtn: false,
+            sucursales:[],
+            sucursal:{
+                nombre: "",
+                ubicacion: "",
+                puntosReferencia: "",
+                horarioI: "",
+                horarioF: "",
+                descripcion: "",
+                clinicaId: "",
+                estado: ""
+            },
             clinica: {
                 nombre: "",
                 subDescripcion: "",
@@ -551,6 +562,7 @@ export default {
                 estado: ""
             },
             slcClinicas: {},
+            slcSucursales: {},
         };
     },
     methods: {
@@ -565,6 +577,10 @@ export default {
         async getCategorias() {
             const { data } = await axios.get("categoria", this.config);
             this.categorias = data;
+        },
+        async getSucursales() {
+            const { data } = await axios.get("sucursal", this.config);
+            this.sucursales = data;
         },
 
         async addClinicas() {

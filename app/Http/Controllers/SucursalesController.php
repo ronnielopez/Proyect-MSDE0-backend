@@ -7,14 +7,14 @@ use Illuminate\Http\Request;
 
 class SucursalesController extends Controller
 {
-    /**
+   /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        return Sucursales::all();
     }
 
     /**
@@ -35,27 +35,50 @@ class SucursalesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request , [
+            'nombre' => 'required',
+            'ubicacion' => 'required',
+            'puntosReferencia' => 'required',
+            'horarioI' => 'required',
+            'horarioF' => 'required',
+            'descripcion' => 'required',
+            'clinicaId' => 'required',
+            'estado' => 'required',
+        ]);
+
+        $sucursal = new Sucursales;
+        $sucursal->nombre = $request->nombre;
+        $sucursal->ubicacion = $request->ubicacion;
+        $sucursal->puntosReferencia = $request->puntosReferencia;
+        $sucursal->horarioI = $request->horarioI;
+        $sucursal->horarioF = $request->horarioF;
+        $sucursal->descripcion = $request->descripcion;
+        $sucursal->clinicaId = $request->clinicaId;
+        $sucursal->estado = $request->estado;
+
+        $sucursal->save();
+
+        return response ("Sucursal creada" , 201);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Sucursales  $sucursales
+     * @param  \App\Models\suscripciones  $suscripciones
      * @return \Illuminate\Http\Response
      */
-    public function show(Sucursales $sucursales)
+    public function show($id)
     {
-        //
+        return Sucursales::find($id);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Sucursales  $sucursales
+     * @param  \App\Models\suscripciones  $suscripciones
      * @return \Illuminate\Http\Response
      */
-    public function edit(Sucursales $sucursales)
+    public function edit(suscripciones $suscripciones)
     {
         //
     }
@@ -64,22 +87,47 @@ class SucursalesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Sucursales  $sucursales
+     * @param  \App\Models\suscripciones  $suscripciones
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Sucursales $sucursales)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate($request , [
+            'nombre' => 'required',
+            'ubicacion' => 'required',
+            'puntosReferencia' => 'required',
+            'horarioI' => 'required',
+            'horarioF' => 'required',
+            'descripcion' => 'required',
+            'clinicaId' => 'required',
+            'estado' => 'required',
+        ]);
+
+        $sucursal = Sucursales::find($id);
+        $sucursal->nombre = $request->nombre;
+        $sucursal->ubicacion = $request->ubicacion;
+        $sucursal->puntosReferencia = $request->puntosReferencia;
+        $sucursal->horarioI = $request->horarioI;
+        $sucursal->horarioF = $request->horarioF;
+        $sucursal->descripcion = $request->descripcion;
+        $sucursal->clinicaId = $request->clinicaId;
+        $sucursal->estado = $request->estado;
+
+        $sucursal->save();
+
+        return response ("Suscripcion actualizada" , 201);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Sucursales  $sucursales
+     * @param  \App\Models\suscripciones  $suscripciones
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Sucursales $sucursales)
+    public function destroy($id)
     {
-        //
+        Sucursales::find($id)->delete();
+
+        return response("Eliminado correctamente" , 200);
     }
 }
