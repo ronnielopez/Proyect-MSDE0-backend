@@ -134,6 +134,16 @@
                                         placeholder="Nombre"
                                     />
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="logo">Logo</label>
+                                    <input
+                                        type="file"
+                                        ref="logo"
+                                        class="form-control-file"
+                                    />
+                                </div>
+
                                 <div class="form-group">
                                     <label for="sub"
                                         >Sub descripcion de la clinica</label
@@ -199,24 +209,23 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="categoria">Categoria</label>
-                                    <select
-                                        v-model="clinica.categoriaId"
-                                        class="form-control"
-                                        name="categoria"
-                                        id="categoria"
-                                    >
-                                        <option selected disabled>
-                                            Seleccione una categoria
-                                        </option>
-                                        <option
-                                            :value="y.id"
+                                    <label for="categorias">Categorias</label>
+                                    <div class="row">
+                                        <div
                                             v-for="y in categorias"
-                                            :key="y.id"
+                                            class="col-sm-6"
                                         >
-                                            {{ y.nombre }}
-                                        </option>
-                                    </select>
+                                            <label class="pr-2">{{
+                                                y.nombre
+                                            }}</label>
+                                            <input
+                                                type="checkbox"
+                                                v-model="clinica.categoriaId"
+                                                :label="`${y.nombre}`"
+                                                :value="y.id"
+                                            />
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
@@ -287,6 +296,14 @@
                                     />
                                 </div>
                                 <div class="form-group">
+                                    <label for="logo">Logo</label>
+                                    <input
+                                        type="file"
+                                        ref="logoedit"
+                                        class="form-control-file"
+                                    />
+                                </div>
+                                <div class="form-group">
                                     <label for="sub"
                                         >Sub descripcion de la clinica</label
                                     >
@@ -351,24 +368,25 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="categoria">Categoria</label>
-                                    <select
-                                        v-model="slcClinicas.categoriaId"
-                                        class="form-control"
-                                        name="categoria"
-                                        id="categoria"
-                                    >
-                                        <option selected disabled>
-                                            Seleccione una categoria
-                                        </option>
-                                        <option
-                                            :value="y.id"
+                                    <label for="categorias">Categorias</label>
+                                    <div class="row">
+                                        <div
                                             v-for="y in categorias"
-                                            :key="y.id"
+                                            class="col-sm-6"
                                         >
-                                            {{ y.nombre }}
-                                        </option>
-                                    </select>
+                                            <label class="pr-2">{{
+                                                y.nombre
+                                            }}</label>
+                                            <input
+                                                type="checkbox"
+                                                v-model="
+                                                    slcClinicas.categoriaId
+                                                "
+                                                :label="`${y.nombre}`"
+                                                :value="y.id"
+                                            />
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
@@ -468,16 +486,16 @@
                                                         @click="
                                                             editarSucSec = true;
                                                             crearSucbtn = true;
-                                                            selectedSucursal(sucursal);
+                                                            selectedSucursal(
+                                                                sucursal
+                                                            );
                                                         "
                                                         >Editar</a
                                                     >
                                                     <a
                                                         type="button"
                                                         class="btn btn-danger"
-                                                        @click="
-                                                            
-                                                        "
+                                                        @click=""
                                                         >Eliminar</a
                                                     >
                                                 </td>
@@ -499,119 +517,175 @@
                                             >
                                         </button>
                                         <form
-                                id="editarForm"
-                                @submit.prevent="addSucursal"
-                            >
-                                <div class="form-group">
-                                    <label for="nombre"
-                                        >Nombre de la Sucursal</label
-                                    >
-                                    <input
-                                        type="text"
-                                        v-model="sucursal.nombre"
-                                        class="form-control"
-                                        id="nombre"
-                                        placeholder="Nombre"
-                                    />
-                                </div>
-                                <div class="form-group">
-                                    <label for="ubicacion"
-                                        >Ubicacion</label
-                                    >
-                                    <input
-                                        type="text"
-                                        v-model="sucursal.ubicacion"
-                                        class="form-control"
-                                        id="ubicacion"
-                                        placeholder="Ubicacion"
-                                    />
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="nombre"
-                                        >Puntos de Referencia (opcional)</label
-                                    >
-                                    <input
-                                        type="text"
-                                        v-model="sucursal.puntosReferencia"
-                                        class="form-control"
-                                        id="puntosReferencia"
-                                        placeholder="puntosRef"
-                                    />
-                                </div>
-                                <div class="form-group">
-                                    <label for="nombre"
-                                        >Hora de Entrada de L a V</label
-                                    >
-                                    <input
-                                        type="text"
-                                        v-model="sucursal.horarioI"
-                                        class="form-control"
-                                        id="horarioI"
-                                        placeholder="9:00 am"
-                                    />
-                                </div>
-                                <div class="form-group">
-                                    <label for="nombre"
-                                        >Hora de Salida de L a V</label
-                                    >
-                                    <input
-                                        type="text"
-                                        v-model="sucursal.horarioF"
-                                        class="form-control"
-                                        id="horarioF"
-                                        placeholder="5:00 pm"
-                                    />
-                                </div>
-                                 <div class="form-group">
-                                    <label for="descripcion">Descripcion</label>
-                                    <textarea
-                                        class="form-control"
-                                        id="descripcion"
-                                        v-model="sucursal.descripcion"
-                                        rows="3"
-                                    ></textarea>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="clinica">Clinica</label>
-                                    <select
-                                        v-model="sucursal.clinicaId"
-                                        class="form-control"
-                                        name="clinicaId"
-                                        id="clinicaId"
-                                    >
-                                        <option selected disabled>
-                                            Seleccione una Clinica
-                                        </option>
-                                        <option
-                                            :value="y.id"
-                                            v-for="y in clinicas"
-                                            :key="y.id"
+                                            id="editarForm"
+                                            @submit.prevent="addSucursal"
                                         >
-                                            {{ y.nombre }}
-                                        </option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="categoria">Estado</label>
-                                    <select
-                                        v-model="sucursal.estado"
-                                        class="form-control"
-                                        name="estado"
-                                        id="estado"
-                                    >
-                                        <option selected disabled>
-                                            Seleccione una estado
-                                        </option>
-                                        <option value="1">Desabilitado</option>
-                                        <option value="2">Activo</option>
-                                    </select>
-                                </div>
-                                <button type="submit" class="btn btn-success">
-                                    Crear sucursal
-                                </button>
-                            </form>
+                                            <div class="form-group">
+                                                <label for="nombre"
+                                                    >Nombre de la
+                                                    Sucursal</label
+                                                >
+                                                <input
+                                                    type="text"
+                                                    v-model="sucursal.nombre"
+                                                    class="form-control"
+                                                    id="nombre"
+                                                    placeholder="Nombre"
+                                                />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="ubicacion"
+                                                    >Ubicacion</label
+                                                >
+                                                <input
+                                                    type="text"
+                                                    v-model="sucursal.ubicacion"
+                                                    class="form-control"
+                                                    id="ubicacion"
+                                                    placeholder="Ubicacion"
+                                                />
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="nombre"
+                                                    >Puntos de Referencia
+                                                    (opcional)</label
+                                                >
+                                                <input
+                                                    type="text"
+                                                    v-model="
+                                                        sucursal.puntosReferencia
+                                                    "
+                                                    class="form-control"
+                                                    id="puntosReferencia"
+                                                    placeholder="puntosRef"
+                                                />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="nombre"
+                                                    >Hora de Entrada de L a
+                                                    V</label
+                                                >
+                                                <input
+                                                    type="text"
+                                                    v-model="sucursal.horarioI"
+                                                    class="form-control"
+                                                    id="horarioI"
+                                                    placeholder="9:00 am"
+                                                />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="nombre"
+                                                    >Hora de Salida de L a
+                                                    V</label
+                                                >
+                                                <input
+                                                    type="text"
+                                                    v-model="sucursal.horarioF"
+                                                    class="form-control"
+                                                    id="horarioF"
+                                                    placeholder="5:00 pm"
+                                                />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="nombre"
+                                                    >Telefono</label
+                                                >
+                                                <input
+                                                    type="text"
+                                                    v-model="sucursal.telefono"
+                                                    class="form-control"
+                                                    id="telefono"
+                                                    placeholder="2222-8888"
+                                                />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="nombre"
+                                                    >Municipio</label
+                                                >
+                                                <input
+                                                    type="text"
+                                                    v-model="sucursal.municipio"
+                                                    class="form-control"
+                                                    id="municipio"
+                                                    placeholder=""
+                                                />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="nombre"
+                                                    >Departamento</label
+                                                >
+                                                <input
+                                                    type="text"
+                                                    v-model="sucursal.departamento"
+                                                    class="form-control"
+                                                    id="departamento"
+                                                    placeholder=""
+                                                />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="descripcion"
+                                                    >Descripcion</label
+                                                >
+                                                <textarea
+                                                    class="form-control"
+                                                    id="descripcion"
+                                                    v-model="
+                                                        sucursal.descripcion
+                                                    "
+                                                    rows="3"
+                                                ></textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="clinica"
+                                                    >Clinica</label
+                                                >
+                                                <select
+                                                    v-model="sucursal.clinicaId"
+                                                    class="form-control"
+                                                    name="clinicaId"
+                                                    id="clinicaId"
+                                                >
+                                                    <option selected disabled>
+                                                        Seleccione una Clinica
+                                                    </option>
+                                                    <option
+                                                        :value="y.id"
+                                                        v-for="y in clinicas"
+                                                        :key="y.id"
+                                                    >
+                                                        {{ y.nombre }}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="categoria"
+                                                    >Estado</label
+                                                >
+                                                <select
+                                                    v-model="sucursal.estado"
+                                                    class="form-control"
+                                                    name="estado"
+                                                    id="estado"
+                                                >
+                                                    <option selected disabled>
+                                                        Seleccione una estado
+                                                    </option>
+                                                    <option value="1">
+                                                        Desabilitado
+                                                    </option>
+                                                    <option value="2">
+                                                        Activo
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <button
+                                                type="submit"
+                                                class="btn btn-success"
+                                            >
+                                                Crear sucursal
+                                            </button>
+                                        </form>
                                     </div>
                                     <div v-else>
                                         <button
@@ -626,120 +700,185 @@
                                                 >&times;</span
                                             >
                                         </button>
-                                              <form
-                                id="editarForm"
-                                @submit.prevent="editSucursal"
-                            >
-                                <div class="form-group">
-                                    <label for="nombre"
-                                        >Nombre de la Sucursal</label
-                                    >
-                                    <input
-                                        type="text"
-                                        v-model="slcSucursal.nombre"
-                                        class="form-control"
-                                        id="nombre"
-                                        placeholder="Nombre"
-                                    />
-                                </div>
-                                <div class="form-group">
-                                    <label for="ubicacion"
-                                        >Ubicacion</label
-                                    >
-                                    <input
-                                        type="text"
-                                        v-model="slcSucursal.ubicacion"
-                                        class="form-control"
-                                        id="ubicacion"
-                                        placeholder="Ubicacion"
-                                    />
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="nombre"
-                                        >Puntos de Referencia (opcional)</label
-                                    >
-                                    <input
-                                        type="text"
-                                        v-model="slcSucursal.puntosReferencia"
-                                        class="form-control"
-                                        id="puntosReferencia"
-                                        placeholder="puntosRef"
-                                    />
-                                </div>
-                                <div class="form-group">
-                                    <label for="nombre"
-                                        >Hora de Entrada de L a V</label
-                                    >
-                                    <input
-                                        type="text"
-                                        v-model="slcSucursal.horarioI"
-                                        class="form-control"
-                                        id="horarioI"
-                                        placeholder="9:00 am"
-                                    />
-                                </div>
-                                <div class="form-group">
-                                    <label for="nombre"
-                                        >Hora de Salida de L a V</label
-                                    >
-                                    <input
-                                        type="text"
-                                        v-model="slcSucursal.horarioF"
-                                        class="form-control"
-                                        id="horarioF"
-                                        placeholder="5:00 pm"
-                                    />
-                                </div>
-                                 <div class="form-group">
-                                    <label for="descripcion">Descripcion</label>
-                                    <textarea
-                                        class="form-control"
-                                        id="descripcion"
-                                        v-model="slcSucursal.descripcion"
-                                        rows="3"
-                                    ></textarea>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="clinica">Clinica</label>
-                                    <select
-                                        v-model="slcSucursal.clinicaId"
-                                        class="form-control"
-                                        name="clinicaId"
-                                        id="clinicaId"
-                                    >
-                                        <option selected disabled>
-                                            Seleccione una Clinica
-                                        </option>
-                                        <option
-                                            :value="y.id"
-                                            v-for="y in clinicas"
-                                            :key="y.id"
+                                        <form
+                                            id="editarForm"
+                                            @submit.prevent="editSucursal"
                                         >
-                                            {{ y.nombre }}
-                                        </option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="categoria">Estado</label>
-                                    <select
-                                        v-model="slcSucursal.estado"
-                                        class="form-control"
-                                        name="estado"
-                                        id="estado"
-                                    >
-                                        <option selected disabled>
-                                            Seleccione una estado
-                                        </option>
-                                        <option value="1">Desabilitado</option>
-                                        <option value="2">Activo</option>
-                                    </select>
-                                </div>
-                                <button type="submit" class="btn btn-warning text-white">
-                                    Editar sucursal
-                                </button>
-                            </form>
+                                            <div class="form-group">
+                                                <label for="nombre"
+                                                    >Nombre de la
+                                                    Sucursal</label
+                                                >
+                                                <input
+                                                    type="text"
+                                                    v-model="slcSucursal.nombre"
+                                                    class="form-control"
+                                                    id="nombre"
+                                                    placeholder="Nombre"
+                                                />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="ubicacion"
+                                                    >Ubicacion</label
+                                                >
+                                                <input
+                                                    type="text"
+                                                    v-model="
+                                                        slcSucursal.ubicacion
+                                                    "
+                                                    class="form-control"
+                                                    id="ubicacion"
+                                                    placeholder="Ubicacion"
+                                                />
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="nombre"
+                                                    >Puntos de Referencia
+                                                    (opcional)</label
+                                                >
+                                                <input
+                                                    type="text"
+                                                    v-model="
+                                                        slcSucursal.puntosReferencia
+                                                    "
+                                                    class="form-control"
+                                                    id="puntosReferencia"
+                                                    placeholder="puntosRef"
+                                                />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="nombre"
+                                                    >Hora de Entrada de L a
+                                                    V</label
+                                                >
+                                                <input
+                                                    type="text"
+                                                    v-model="
+                                                        slcSucursal.horarioI
+                                                    "
+                                                    class="form-control"
+                                                    id="horarioI"
+                                                    placeholder="9:00 am"
+                                                />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="nombre"
+                                                    >Hora de Salida de L a
+                                                    V</label
+                                                >
+                                                <input
+                                                    type="text"
+                                                    v-model="
+                                                        slcSucursal.horarioF
+                                                    "
+                                                    class="form-control"
+                                                    id="horarioF"
+                                                    placeholder="5:00 pm"
+                                                />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="nombre"
+                                                    >Telefono</label
+                                                >
+                                                <input
+                                                    type="text"
+                                                    v-model="slcSucursal.telefono"
+                                                    class="form-control"
+                                                    id="telefono"
+                                                    placeholder="2222-8888"
+                                                />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="nombre"
+                                                    >Municipio</label
+                                                >
+                                                <input
+                                                    type="text"
+                                                    v-model="slcSucursal.municipio"
+                                                    class="form-control"
+                                                    id="municipio"
+                                                    placeholder=""
+                                                />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="nombre"
+                                                    >Departamento</label
+                                                >
+                                                <input
+                                                    type="text"
+                                                    v-model="slcSucursal.departamento"
+                                                    class="form-control"
+                                                    id="departamento"
+                                                    placeholder=""
+                                                />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="descripcion"
+                                                    >Descripcion</label
+                                                >
+                                                <textarea
+                                                    class="form-control"
+                                                    id="descripcion"
+                                                    v-model="
+                                                        slcSucursal.descripcion
+                                                    "
+                                                    rows="3"
+                                                ></textarea>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="clinica"
+                                                    >Clinica</label
+                                                >
+                                                <select
+                                                    v-model="
+                                                        slcSucursal.clinicaId
+                                                    "
+                                                    class="form-control"
+                                                    name="clinicaId"
+                                                    id="clinicaId"
+                                                >
+                                                    <option selected disabled>
+                                                        Seleccione una Clinica
+                                                    </option>
+                                                    <option
+                                                        :value="y.id"
+                                                        v-for="y in clinicas"
+                                                        :key="y.id"
+                                                    >
+                                                        {{ y.nombre }}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="categoria"
+                                                    >Estado</label
+                                                >
+                                                <select
+                                                    v-model="slcSucursal.estado"
+                                                    class="form-control"
+                                                    name="estado"
+                                                    id="estado"
+                                                >
+                                                    <option selected disabled>
+                                                        Seleccione una estado
+                                                    </option>
+                                                    <option value="1">
+                                                        Desabilitado
+                                                    </option>
+                                                    <option value="2">
+                                                        Activo
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <button
+                                                type="submit"
+                                                class="btn btn-warning text-white"
+                                            >
+                                                Editar sucursal
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -764,31 +903,35 @@ export default {
         return {
             clinicas: [],
             user: [],
-            categorias:[],
+            categorias: [],
             editarSuc: false,
             editarSucSec: false,
             crearSuc: false,
             crearSucbtn: false,
-            sucursales:[],
-            sucursal:{
+            sucursales: [],
+            sucursal: {
                 nombre: "",
                 ubicacion: "",
                 puntosReferencia: "",
                 horarioI: "",
                 horarioF: "",
                 descripcion: "",
+                telefono:"",
+                municipio:"",
+                departamento:"",
                 clinicaId: "",
-                estado: ""
+                estado: "",
             },
             clinica: {
                 nombre: "",
+                logo: "",
                 subDescripcion: "",
                 descripcion: "",
                 apr1: "",
                 apr2: "",
                 userId: "",
-                categoriaId:"",
-                estado: ""
+                categoriaId: [],
+                estado: "",
             },
             slcClinicas: {},
             slcSucursales: {},
@@ -813,7 +956,11 @@ export default {
         },
 
         async addClinicas() {
-            const res = await axios.post("clinica", this.clinica, this.config);
+            this.clinica.categoriaId = JSON.stringify(this.clinica.categoriaId);
+            let data = this.FormData(this.clinica);
+            let logo = this.$refs.logo.files[0];
+            data.append("logo", logo);
+            const res = await axios.post("clinica", data, this.config);
             if (res.status === 201) {
                 Toast.fire({
                     icon: "success",
@@ -829,14 +976,24 @@ export default {
                 this.clinica = {};
             }
         },
-         async addSucursal() {
-            const res = await axios.post("sucursal", this.sucursal, this.config);
+         FormData: function (obj) {
+            var form_data = new FormData();
+            for (var key in obj) {
+                form_data.append(key, obj[key]);
+            }
+            return form_data;
+        },
+        async addSucursal() {
+            const res = await axios.post(
+                "sucursal",
+                this.sucursal,
+                this.config2
+            );
             if (res.status === 201) {
                 Toast.fire({
                     icon: "success",
                     title: res.data,
                 });
-
                 this.getClinicas();
                 this.getUsuarios();
                 this.getCategorias();
@@ -844,13 +1001,8 @@ export default {
                 this.sucursal = {};
             }
         },
-
         async editClinicas() {
-            const res = await axios.put(
-                "clinica/" + this.slcClinicas.id,
-                this.slcClinicas,
-                this.config
-            );
+            const res = await axios.put("clinica/" + this.slcClinicas.id, this.slcClinicas, this.config);
             if (res.status === 201) {
                 Toast.fire({
                     icon: "success",
@@ -870,7 +1022,7 @@ export default {
             const res = await axios.put(
                 "sucursal/" + this.slcSucursal.id,
                 this.slcSucursal,
-                this.config
+                this.config2
             );
             if (res.status === 201) {
                 Toast.fire({
@@ -901,7 +1053,7 @@ export default {
         async deleteSucursal() {
             const res = await axios.delete(
                 "sucursal/" + this.slcSucursal.id,
-                this.config
+                this.config2
             );
             if (res.status === 201) {
                 Toast.fire({
@@ -914,6 +1066,9 @@ export default {
         selectedClinica(clinica) {
             let notReactive = JSON.stringify(clinica);
             this.slcClinicas = JSON.parse(notReactive);
+            this.slcClinicas.categoriaId = JSON.parse(
+                this.slcClinicas.categoriaId
+            );
         },
         selectedSucursal(sucursal) {
             let notReactive = JSON.stringify(sucursal);
@@ -956,7 +1111,26 @@ export default {
                 return false;
             }
             return {
-                headers: { Authorization: `${token}` },
+                headers: {
+                    Authorization: `${token}`,
+                    "Content-Type": "multipart/form-data",
+                },
+            };
+        },
+        config2() {
+            let token = null;
+            var match = document.cookie.match(
+                new RegExp("(^| )" + "XSRF-TOKEN" + "=([^;]+)")
+            );
+            if (match) {
+                token = match[2];
+            } else {
+                return false;
+            }
+            return {
+                headers: {
+                    Authorization: `${token}`
+                },
             };
         },
     },

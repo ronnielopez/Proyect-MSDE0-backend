@@ -42,6 +42,9 @@ class SucursalesController extends Controller
             'horarioI' => 'required',
             'horarioF' => 'required',
             'descripcion' => 'required',
+            'telefono' => 'required',
+            'municipio' => 'required',
+            'departamento' => 'required',
             'clinicaId' => 'required',
             'estado' => 'required',
         ]);
@@ -53,6 +56,9 @@ class SucursalesController extends Controller
         $sucursal->horarioI = $request->horarioI;
         $sucursal->horarioF = $request->horarioF;
         $sucursal->descripcion = $request->descripcion;
+        $sucursal->telefono = $request->telefono;
+        $sucursal->municipio = $request->municipio;
+        $sucursal->departamento = $request->departamento;
         $sucursal->clinicaId = $request->clinicaId;
         $sucursal->estado = $request->estado;
 
@@ -99,6 +105,9 @@ class SucursalesController extends Controller
             'horarioI' => 'required',
             'horarioF' => 'required',
             'descripcion' => 'required',
+            'telefono' => 'required',
+            'municipio' => 'required',
+            'departamento' => 'required',
             'clinicaId' => 'required',
             'estado' => 'required',
         ]);
@@ -110,6 +119,9 @@ class SucursalesController extends Controller
         $sucursal->horarioI = $request->horarioI;
         $sucursal->horarioF = $request->horarioF;
         $sucursal->descripcion = $request->descripcion;
+        $sucursal->telefono = $request->telefono;
+        $sucursal->municipio = $request->municipio;
+        $sucursal->departamento = $request->departamento;
         $sucursal->clinicaId = $request->clinicaId;
         $sucursal->estado = $request->estado;
 
@@ -129,5 +141,10 @@ class SucursalesController extends Controller
         Sucursales::find($id)->delete();
 
         return response("Eliminado correctamente" , 200);
+    }
+
+    public function showApi($id)
+    {
+        return Sucursales::where("clinicaId", $id)->get();
     }
 }

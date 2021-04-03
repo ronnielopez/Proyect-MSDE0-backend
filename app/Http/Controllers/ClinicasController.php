@@ -37,6 +37,7 @@ class ClinicasController extends Controller
     {
         $this->validate($request , [
             'nombre' => 'required',
+            'logo' => 'required',
             'subDescripcion' => 'required',
             'descripcion' => 'required',
             'apr1' => 'required',
@@ -45,9 +46,14 @@ class ClinicasController extends Controller
             'categoriaId' => 'required',
             'estado' => 'required'
         ]);
-
+        
         $clinica = new Clinicas;
+        
         $clinica->nombre = $request->nombre;
+        //logo almacenamiento
+        $file_name = $request->file('logo')->getClientOriginalName();
+        $request->file('logo')->storeAs('logos', $file_name, 'public');
+        $clinica->logo = $file_name;
         $clinica->subDescripcion = $request->subDescripcion;
         $clinica->descripcion = $request->descripcion;
         $clinica->apr1 = $request->apr1;
@@ -59,6 +65,7 @@ class ClinicasController extends Controller
         $clinica->save();
 
         return response ("Clinica creada" , 201);
+
     }
 
     /**
@@ -94,17 +101,23 @@ class ClinicasController extends Controller
     {
         $this->validate($request , [
             'nombre' => 'required',
+            'logo' => 'required',
             'subDescripcion' => 'required',
             'descripcion' => 'required',
             'apr1' => 'required',
             'apr2' => 'required',
-            'userId'=> 'required',
+            'userId' => 'required',
             'categoriaId' => 'required',
             'estado' => 'required'
         ]);
-
+        
         $clinica = Clinicas::find($id);
+        
         $clinica->nombre = $request->nombre;
+        //logo almacenamiento
+        $file_name = $request->file('logo')->getClientOriginalName();
+        $request->file('logo')->storeAs('logos', $file_name, 'public');
+        $clinica->logo = $file_name;
         $clinica->subDescripcion = $request->subDescripcion;
         $clinica->descripcion = $request->descripcion;
         $clinica->apr1 = $request->apr1;
@@ -129,5 +142,49 @@ class ClinicasController extends Controller
         Clinicas::find($id)->delete();
 
         return response("Eliminado correctamente" , 200);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeApi(Request $request)
+    {
+        $this->validate($request , [
+            'nombre' => 'required',
+            'logo' => 'required',
+            'subDescripcion' => 'required',
+            'descripcion' => 'required',
+            'apr1' => 'required',
+            'apr2' => 'required',
+            'userId' => 'required',
+            'categoriaId' => 'required'
+        ]);
+        
+        $clinica = new Clinicas;
+        
+        $clinica->nombre = $request->nombre;
+        //logo almacenamiento
+        $file_name = $request->file('logo')->getClientOriginalName();
+        $request->file('logo')->storeAs('logos', $file_name, 'public');
+        $clinica->logo = $file_name;
+        $clinica->subDescripcion = $request->subDescripcion;
+        $clinica->descripcion = $request->descripcion;
+        $clinica->apr1 = $request->apr1;
+        $clinica->apr2 = $request->apr2;
+        $clinica->userId = $request->userId;
+        $clinica->categoriaId = $request->categoriaId;
+
+        $clinica->save();
+
+        return response ("Clinica creada" , 201);
+
+    }
+
+    public function showApi($id)
+    {
+        return Clinicas::where("userId", $id)->get();
     }
 }

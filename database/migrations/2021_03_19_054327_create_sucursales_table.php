@@ -21,6 +21,9 @@ class CreateSucursalesTable extends Migration
             $table->string('horarioI');
             $table->string('horarioF');
             $table->string('descripcion');
+            $table->string('telefono');
+            $table->string('municipio');
+            $table->string('departamento');
             $table->string('clinicaId');
             $table->string('estado')->default("2");
             $table->timestamps();

@@ -21,6 +21,9 @@ class Sucursales extends Model
         'horarioI',
         'horarioF',
         'descripcion',
+        'telefono',
+        'municipio',
+        'departamento',
         'clinicaId',
         'estado'
     ];

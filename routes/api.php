@@ -33,9 +33,15 @@ Route::put('planes/{planes}' , 'App\Http\Controllers\AuthController@planes')->mi
 //frontend routes
 Route::get('planes' , 'App\Http\Controllers\SuscripcionesController@index');
 Route::get('clinicas' , 'App\Http\Controllers\ClinicasController@index');
+Route::get('categorias' , 'App\Http\Controllers\CategoriasController@index');
+Route::post('storeClinicas' , 'App\Http\Controllers\ClinicasController@storeApi')->middleware('auth:sanctum');
+Route::get('showApiClinicas/{id}' , 'App\Http\Controllers\ClinicasController@showApi')->middleware('auth:sanctum');
+Route::get('showApiSucursales/{id}' , 'App\Http\Controllers\SucursalesController@showApi')->middleware('auth:sanctum');
 
 
-Route::apiResource('categoria' , 'App\Http\Controllers\CategoriasController')->middleware('auth:sanctum');
+
+/*Route::apiResource('categoria' , 'App\Http\Controllers\CategoriasController')->middleware('auth:sanctum');
 Route::apiResource('suscripcion' , 'App\Http\Controllers\SuscripcionesController')->middleware('auth:sanctum');
 Route::apiResource('comercio' , 'App\Http\Controllers\ComercioController')->middleware('auth:sanctum');
 Route::apiResource('usuarios' , 'App\Http\Controllers\UserController')->middleware('auth:sanctum');
+*/

@@ -16,6 +16,7 @@ class CreateClinicasTable extends Migration
         Schema::create('clinicas', function (Blueprint $table) {
             $table->id();
             $table->string('nombre',40);
+            $table->string('logo');
             $table->string('subDescripcion');
             $table->string('descripcion');
             $table->string('apr1');

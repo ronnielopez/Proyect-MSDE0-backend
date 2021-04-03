@@ -11,6 +11,7 @@ class Clinicas extends Model
 
     protected $fillable = [
         'nombre',
+        'logo',
         'subDescripcion',
         'descripcion',
         'apr1',
