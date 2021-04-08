@@ -34,11 +34,15 @@ Route::put('planes/{planes}' , 'App\Http\Controllers\AuthController@planes')->mi
 Route::get('planes' , 'App\Http\Controllers\SuscripcionesController@index');
 Route::get('clinicas' , 'App\Http\Controllers\ClinicasController@index');
 Route::get('categorias' , 'App\Http\Controllers\CategoriasController@index');
+//clinica
 Route::post('storeClinicas' , 'App\Http\Controllers\ClinicasController@storeApi')->middleware('auth:sanctum');
 Route::get('showApiClinicas/{id}' , 'App\Http\Controllers\ClinicasController@showApi')->middleware('auth:sanctum');
+//sucursal
 Route::get('showApiSucursales/{id}' , 'App\Http\Controllers\SucursalesController@showApi')->middleware('auth:sanctum');
-
-
+Route::post('storeSucursal' , 'App\Http\Controllers\SucursalesController@storeApi')->middleware('auth:sanctum');
+//doctores
+Route::post('storeDoctores' , 'App\Http\Controllers\DoctoresController@storeApi')->middleware('auth:sanctum');
+Route::get('showApiDoctores/{id}' , 'App\Http\Controllers\DoctoresController@showApi');
 
 /*Route::apiResource('categoria' , 'App\Http\Controllers\CategoriasController')->middleware('auth:sanctum');
 Route::apiResource('suscripcion' , 'App\Http\Controllers\SuscripcionesController')->middleware('auth:sanctum');

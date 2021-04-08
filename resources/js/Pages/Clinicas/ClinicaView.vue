@@ -587,6 +587,7 @@
                                                     placeholder="5:00 pm"
                                                 />
                                             </div>
+
                                             <div class="form-group">
                                                 <label for="nombre"
                                                     >Telefono</label
@@ -617,7 +618,9 @@
                                                 >
                                                 <input
                                                     type="text"
-                                                    v-model="sucursal.departamento"
+                                                    v-model="
+                                                        sucursal.departamento
+                                                    "
                                                     class="form-control"
                                                     id="departamento"
                                                     placeholder=""
@@ -783,7 +786,9 @@
                                                 >
                                                 <input
                                                     type="text"
-                                                    v-model="slcSucursal.telefono"
+                                                    v-model="
+                                                        slcSucursal.telefono
+                                                    "
                                                     class="form-control"
                                                     id="telefono"
                                                     placeholder="2222-8888"
@@ -795,7 +800,9 @@
                                                 >
                                                 <input
                                                     type="text"
-                                                    v-model="slcSucursal.municipio"
+                                                    v-model="
+                                                        slcSucursal.municipio
+                                                    "
                                                     class="form-control"
                                                     id="municipio"
                                                     placeholder=""
@@ -807,7 +814,9 @@
                                                 >
                                                 <input
                                                     type="text"
-                                                    v-model="slcSucursal.departamento"
+                                                    v-model="
+                                                        slcSucursal.departamento
+                                                    "
                                                     class="form-control"
                                                     id="departamento"
                                                     placeholder=""
@@ -916,9 +925,9 @@ export default {
                 horarioI: "",
                 horarioF: "",
                 descripcion: "",
-                telefono:"",
-                municipio:"",
-                departamento:"",
+                telefono: "",
+                municipio: "",
+                departamento: "",
                 clinicaId: "",
                 estado: "",
             },
@@ -959,6 +968,7 @@ export default {
             this.clinica.categoriaId = JSON.stringify(this.clinica.categoriaId);
             let data = this.FormData(this.clinica);
             let logo = this.$refs.logo.files[0];
+            console.log(logo);
             data.append("logo", logo);
             const res = await axios.post("clinica", data, this.config);
             if (res.status === 201) {
@@ -976,7 +986,7 @@ export default {
                 this.clinica = {};
             }
         },
-         FormData: function (obj) {
+        FormData: function (obj) {
             var form_data = new FormData();
             for (var key in obj) {
                 form_data.append(key, obj[key]);
@@ -1002,7 +1012,11 @@ export default {
             }
         },
         async editClinicas() {
-            const res = await axios.put("clinica/" + this.slcClinicas.id, this.slcClinicas, this.config);
+            const res = await axios.put(
+                "clinica/" + this.slcClinicas.id,
+                this.slcClinicas,
+                this.config
+            );
             if (res.status === 201) {
                 Toast.fire({
                     icon: "success",
@@ -1129,7 +1143,7 @@ export default {
             }
             return {
                 headers: {
-                    Authorization: `${token}`
+                    Authorization: `${token}`,
                 },
             };
         },
