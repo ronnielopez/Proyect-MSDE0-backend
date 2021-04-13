@@ -40,6 +40,7 @@ Route::get('showApiClinicas/{id}' , 'App\Http\Controllers\ClinicasController@sho
 //sucursal
 Route::get('showApiSucursales/{id}' , 'App\Http\Controllers\SucursalesController@showApi')->middleware('auth:sanctum');
 Route::post('storeSucursal' , 'App\Http\Controllers\SucursalesController@storeApi')->middleware('auth:sanctum');
+Route::put('editSucursal/{editSucursal}' , 'App\Http\Controllers\SucursalesController@editApi')->middleware('auth:sanctum');
 //doctores
 Route::post('storeDoctores' , 'App\Http\Controllers\DoctoresController@storeApi')->middleware('auth:sanctum');
 Route::get('showApiDoctores/{id}' , 'App\Http\Controllers\DoctoresController@showApi');

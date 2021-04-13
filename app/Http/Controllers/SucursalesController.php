@@ -174,6 +174,35 @@ class SucursalesController extends Controller
 
         return response ("Sucursal creada" , 201);
     }
+    public function editApi(Request $request , $id)
+    {
+        $this->validate($request , [
+            'nombre' => 'required',
+            'ubicacion' => 'required',
+            'puntosReferencia' => 'required',
+            'horarioI' => 'required',
+            'horarioF' => 'required',
+            'descripcion' => 'required',
+            'telefono' => 'required',
+            'municipio' => 'required',
+            'departamento' => 'required'
+        ]);
+
+        $sucursal = Sucursales::find($id);
+        $sucursal->nombre = $request->nombre;
+        $sucursal->ubicacion = $request->ubicacion;
+        $sucursal->puntosReferencia = $request->puntosReferencia;
+        $sucursal->horarioI = $request->horarioI;
+        $sucursal->horarioF = $request->horarioF;
+        $sucursal->descripcion = $request->descripcion;
+        $sucursal->telefono = $request->telefono;
+        $sucursal->municipio = $request->municipio;
+        $sucursal->departamento = $request->departamento;
+
+        $sucursal->save();
+
+        return response ("Sucursal actualizada" , 201);
+    }
     public function showApi($id)
     {
         return Sucursales::where("clinicaId", $id)->get();
