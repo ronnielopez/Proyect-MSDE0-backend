@@ -165,6 +165,31 @@ class DoctoresController extends Controller
 
     }
 
+    public function editApi(Request $request, $id)
+    {
+        $this->validate($request , [
+            'nombre' => 'required',
+            'foto' => 'required',
+            'descripcion' => 'required',
+            'categoriaId' => 'required'
+        ]);
+        
+        $doctores = Doctores::find($id);
+        
+        $doctores->nombre = $request->nombre;
+        //logo almacenamiento
+        $file_name = $request->file('foto')->getClientOriginalName();
+        $request->file('foto')->storeAs('PerfilDoc', $file_name, 'public');
+        $doctores->foto = $file_name;
+        $doctores->descripcion = $request->descripcion;
+        $doctores->categoriaId = $request->categoriaId;
+
+        $doctores->save();
+
+        return response ("Doctor editado" , 201);
+
+    }
+
     public function showApi($id)
     {
         return Doctores::where("sucursalId", $id)->get();

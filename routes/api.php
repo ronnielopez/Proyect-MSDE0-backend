@@ -43,6 +43,7 @@ Route::post('storeSucursal' , 'App\Http\Controllers\SucursalesController@storeAp
 Route::put('editSucursal/{editSucursal}' , 'App\Http\Controllers\SucursalesController@editApi')->middleware('auth:sanctum');
 //doctores
 Route::post('storeDoctores' , 'App\Http\Controllers\DoctoresController@storeApi')->middleware('auth:sanctum');
+Route::put('editDoctores' , 'App\Http\Controllers\DoctoresController@editApi')->middleware('auth:sanctum');
 Route::get('showApiDoctores/{id}' , 'App\Http\Controllers\DoctoresController@showApi');
 
 /*Route::apiResource('categoria' , 'App\Http\Controllers\CategoriasController')->middleware('auth:sanctum');

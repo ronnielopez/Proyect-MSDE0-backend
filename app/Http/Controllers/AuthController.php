@@ -61,4 +61,18 @@ class AuthController extends Controller
         return response ("Actualizado correctamente" , 201);
 
     }
+
+
+    function recuperarContra(Request $request){
+        $this->validate($request , [
+            'email' => 'required'
+        ]);
+
+        $base = str_split('abcdefghijklmnopqrstuvwxyz'.'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.'0123456789!@#$%&');
+        //shuffle($base);
+        $rand = '';
+
+        $usuario = User::where('email', $request->email);
+        $usuario->pin = $rand;
+    }
 }
