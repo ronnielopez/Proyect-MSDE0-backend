@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->string('estado')->default('1');
+            $table->string('pin')->nullable();
             $table->timestamps();
         });
     }

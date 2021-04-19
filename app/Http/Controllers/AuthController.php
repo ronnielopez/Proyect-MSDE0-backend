@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Mail\SendMail;
 use Illuminate\Support\Facades\Hash;
+use Mail;
 
 class AuthController extends Controller
 {
@@ -67,12 +69,37 @@ class AuthController extends Controller
         $this->validate($request , [
             'email' => 'required'
         ]);
-
+        $pin = '';
         $base = str_split('abcdefghijklmnopqrstuvwxyz'.'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.'0123456789!@#$%&');
-        //shuffle($base);
-        $rand = '';
+        shuffle($base);
+        foreach (array_rand($base, 5) as $k) $pin .= $base[$k];
+        $usuario = User::where('email', $request->email)->first();
+        $usuario->pin = $pin;
+        $usuario->save();  
+        $details = [
+            'title' => 'Recuperando contraseña',
+            'body' => 'Este es su ping: ' ,
+            'pin' => $pin
+        ];
+        
+        Mail::to($request->email)->send(new SendMail($details));
+        return response ($usuario , 201);
 
-        $usuario = User::where('email', $request->email);
-        $usuario->pin = $rand;
     }
+
+    function cambiarContrasena(Request $request){
+        $this->validate($request , [
+            'id' => 'required',
+            'password' => 'required'
+        ]);
+
+        $usuario = User::find($request->id);
+        $usuario->password = Hash::make($request->password);
+        $usuario->save();
+
+        return response ('Contraseña actualizada' , 201);
+    }
+
+
+
 }
