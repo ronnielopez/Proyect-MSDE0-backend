@@ -30,7 +30,7 @@ Route::post('login' , 'App\Http\Controllers\AuthController@index');
 Route::post('registrar' , 'App\Http\Controllers\AuthController@registrar');
 Route::put('planes/{planes}' , 'App\Http\Controllers\AuthController@planes')->middleware('auth:sanctum');
 Route::post('recuperar' , 'App\Http\Controllers\AuthController@recuperarContra');
-Route::post('cambiarContra' , 'App\Http\Controllers\AuthController@rcambiarContrasena');
+Route::post('cambiarContra' , 'App\Http\Controllers\AuthController@cambiarContrasena');
 
 //frontend routes
 Route::get('planes' , 'App\Http\Controllers\SuscripcionesController@index');
