@@ -1,0 +1,142 @@
+FORMAT: 1A
+HOST: http://127.0.0.1:8000/
+
+# Proyect MSDE
+
+Proyect MSDE it is a teaching project that is based on creating a program to be able to make medical appointments and sell medical products online.
+
+# Auth Routes
+
+## Login route [/login]
+
+### Login [POST]
+
+Returns a user and a project token for each user.
+
++ Request (application/json)
+
+        {
+            "email": "test@gmail.com",
+            "password": "12345678"
+        }
+
++ Response 201 (application/json)
+
+        [
+            {
+            "user": {
+                "id": 1,
+                "name": "John Doe",
+                "email": "test@gmail.com",
+                "role": "administrador",
+                "email_verified_at": "2021-03-18T03:50:28.000000Z",
+                "estado": "3",
+                "created_at": "2021-03-18T03:50:28.000000Z",
+                "updated_at": "2021-04-20T03:08:33.000000Z",
+                "pin": "tYcrd",
+                "profile_photo_url": "https://ui-avatars.com/api/?name=John+Doe&color=7F9CF5&background=EBF4FF"
+            },
+            "token": "20|WaQuccXYxVEm0TYOHpZhLiSJeva0XKmElKWiY5gB"
+            }
+        ]
+        
+## Register route [/registrar]
+
+    + Parameters
+    + Name (String) - Name of the user
+    + Email (String) - Email of the user
+    + Password (String) - Password of the user
+
+### Create a New User [POST]
+
++ Parameters
+    + Name (String) - Name of the user
+    + Email (String) - Email of the user
+    + Password (String) - Password of the user
+
++ Request (application/json)
+
+        {
+            "name": "John Doe",
+            "email": "JohnDoe@gmail.com",
+            "password": "12345678"
+        }
+
++ Response 201 (application/json)
+
+        [
+            { 
+            "message": "Guardado correctamente" 
+            }
+        ]
+    
+
+## Get Planes [/planes]
+
+### All Planes [GET]
+
++ Response 200 (application/json)
+
+        [
+            {
+                "id": 1,
+                "nombre": "Standar",
+                "subtitulo": "Tu mejor opcion",
+                "precio": "43.00",
+                "descripcion": "Es excelenteee y puedes establecerte como clinica",
+                "beneficio1": "Lo mejor de lo mejor",
+                "beneficio2": "Crear tu propia clinica",
+                "beneficio3": "Puedes tener solo una sucursal",
+                "created_at": "2021-03-18T03:56:54.000000Z",
+                "updated_at": "2021-03-20T23:37:50.000000Z"
+            },
+            {
+                "id": 2,
+                "nombre": "Gold",
+                "subtitulo": "Tu mejor opcion",
+                "precio": "60.00",
+                "descripcion": "Es lo mejor que hay",
+                "beneficio1": "Multiples clinicas (max 2)",
+                "beneficio2": "Multiples sucursales (max 2)",
+                "beneficio3": "Recibe solicitud con mas eficiencia",
+                "created_at": "2021-03-18T03:59:25.000000Z",
+                "updated_at": "2021-03-18T03:59:25.000000Z"
+            },
+            {
+                "id": 3,
+                "nombre": "Premium",
+                "subtitulo": "Tu mejor opcion",
+                "precio": "100.00",
+                "descripcion": "Que estas esperando para adquirirnos",
+                "beneficio1": "Multiples clinicas (ilimitadas)",
+                "beneficio2": "Multiples sucursales (ilimitadas)",
+                "beneficio3": "Nuevo panel de control para tus clientes",
+                "created_at": "2021-03-18T04:00:32.000000Z",
+                "updated_at": "2021-03-18T04:00:32.000000Z"
+            }
+    ]
+    
+    
+## Update Planes [/planes/{UserId}]
+    
+    + Parameters
+    + UserId (number) - ID of the User in the form of an integer
+
+### Change Planes [PUT]
+
++ Parameters
+    + UserId (number) - ID of the User in the form of an integer
+
++ Request (application/json)
+    
+    + Headers
+    
+                Authorization: Bearer Token
+
++ Response 201 (application/json)
+
+    [
+        {
+            "Message":"Planes cambiados"
+        }
+    ]
