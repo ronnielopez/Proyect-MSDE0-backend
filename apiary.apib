@@ -5,7 +5,6 @@ HOST: http://127.0.0.1:8000/
 
 Proyect MSDE it is a teaching project that is based on creating a program to be able to make medical appointments and sell medical products online.
 
-# Auth Routes
 
 ## Login route [/login]
 
@@ -42,17 +41,7 @@ Returns a user and a project token for each user.
         
 ## Register route [/registrar]
 
-    + Parameters
-    + Name (String) - Name of the user
-    + Email (String) - Email of the user
-    + Password (String) - Password of the user
-
 ### Create a New User [POST]
-
-+ Parameters
-    + Name (String) - Name of the user
-    + Email (String) - Email of the user
-    + Password (String) - Password of the user
 
 + Request (application/json)
 
@@ -67,6 +56,50 @@ Returns a user and a project token for each user.
         [
             { 
             "message": "Guardado correctamente" 
+            }
+        ]
+
+## Forgotten password [/recuperar]
+This route recibe an email and send a code to a email address with a pin.
+
+### Email for forgotten password [POST]
+
++ Request (application/json)
+
+        {
+            "email": "JohnDoe@gmail.com"
+        }
+
++ Response 201 (application/json)
+
+        {
+            "id": 1,
+            "name": "John Doe",
+            "email": "JohnDoe@gmail.com",
+            "role": "administrador",
+            "email_verified_at": "2021-03-18T03:50:28.000000Z",
+            "estado": "3",
+            "created_at": "2021-03-18T03:50:28.000000Z",
+            "updated_at": "2021-04-25T04:24:48.000000Z",
+            "pin": "oe%zN",
+            "profile_photo_url": "https://ui-avatars.com/api/?name=John+Doe&color=7F9CF5&background=EBF4FF"
+        }
+
+## Change Password [/cambiarContra]
+
+### Create a New User [POST]
+
++ Request (application/json)
+
+        {
+            "password": "12345678"
+        }
+
++ Response 201 (application/json)
+
+        [
+            { 
+            "message": "Contraseña actualizada" 
             }
         ]
     
@@ -118,6 +151,8 @@ Returns a user and a project token for each user.
     
     
 ## Update Planes [/planes/{UserId}]
+
+This route is for to apply a payment gateway and change the Planes of the user.
     
     + Parameters
     + UserId (number) - ID of the User in the form of an integer
@@ -128,7 +163,7 @@ Returns a user and a project token for each user.
     + UserId (number) - ID of the User in the form of an integer
 
 + Request (application/json)
-    
+
     + Headers
     
                 Authorization: Bearer Token
@@ -140,3 +175,84 @@ Returns a user and a project token for each user.
             "Message":"Planes cambiados"
         }
     ]
+
+## Get Clinicas [/clinicas]
+
+### All Clinicas [GET]
+
++ Response 200 (application/json)
+
+        [
+            {
+                "id": 1,
+                "nombre": "Clinica de prueba",
+                "logo": "Logo.png",
+                "subDescripcion": "Tu mejor opcion",
+                "descripcion": "sadddddddddddasd",
+                "apr1": "65",
+                "apr2": "75",
+                "userId": "1",
+                "categoriaId": "[1,3]",
+                "estado": "2",
+                "created_at": "2021-03-25T04:45:16.000000Z",
+                "updated_at": "2021-03-25T04:45:16.000000Z"
+            },
+            {
+                "id": 2,
+                "nombre": "Clinica de prueba 2",
+                "logo": "recibo.PNG",
+                "subDescripcion": "Tu mejor opcion",
+                "descripcion": "asdasdasdasd",
+                "apr1": "32",
+                "apr2": "43",
+                "userId": "1",
+                "categoriaId": "[\"1\",\"3\"]",
+                "estado": "2",
+                "created_at": "2021-03-25T05:09:57.000000Z",
+                "updated_at": "2021-03-25T05:09:57.000000Z"
+            },
+            {
+                "id": 4,
+                "nombre": "Prueba 503",
+                "logo": "Logo.png",
+                "subDescripcion": "mbnmnb",
+                "descripcion": "kjkljlkjlk",
+                "apr1": "50",
+                "apr2": "60",
+                "userId": "1",
+                "categoriaId": "[\"1\",\"2\"]",
+                "estado": "2",
+                "created_at": "2021-04-06T03:57:58.000000Z",
+                "updated_at": "2021-04-06T03:57:58.000000Z"
+            }
+    ]
+
+## Store Clinica [/storeClinicas]
+
+### Create a New Clinica [POST]
+
++ Request (application/json)
+
+    + Headers
+            Authorization: Bearer Token
+    
+    + Body
+        {
+                    "nombre" : "Prueba",
+                    "logo" : "askjdsd.png",
+                    "subDescripcion" : "Lorem Ipsum",
+                    "descripcion" : "Lorem ipsum",
+                    "apr1" : "12",
+                    "apr2" : "20",
+                    "userId" : "1",
+                    "categoriaId" : "1",
+        }
+        
+
++ Response 201 (application/json)
+
+        [
+            { 
+            "message": "Clinica guardada correctamente" 
+            }
+        ]
