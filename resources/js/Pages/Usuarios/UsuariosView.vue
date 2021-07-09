@@ -38,11 +38,11 @@
                     <td scope="row">{{ usuario.id }}</td>
                     <td>{{ usuario.name }}</td>
                     <td>{{ usuario.email }}</td>
-                    <td v-if="usuario.estado === '1'" class='text-danger'>Incompleto</td>
+                    <td v-if="usuario.estado === '1'" class='text-primary'>Paciente</td>
                     <td v-else-if="usuario.estado === '2'" class='text-success'>Completo</td>
                     <td v-else-if="usuario.estado === '3'" class='text-muted'>Standar</td>
-                    <td v-else-if="usuario.estado === '4'" class='text-info'>Gold</td>
-                    <td v-else="usuario.estado === '5'" class='text-warning'>Premium</td>
+                    <td v-else-if="usuario.estado === '4'" class='text-warning'>Gold</td>
+                    <td v-else="usuario.estado === '5'" class='text-danger'>Premium</td>
                     <td>{{ usuario.role }}</td>
                     <td class="text-center">
                       <a
@@ -83,7 +83,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">
-              Crear una nueva categoria
+              Crear un nuevo usuario
             </h5>
             <button
               type="button"
@@ -213,7 +213,7 @@
               <label for="estado">Estado</label>
                 <select v-model="slcUsuario.estado" class="form-control" name="estado" id="estado">
                   <option selected disabled>Seleccione un estado</option>
-                  <option value="1">Incompleto</option>
+                  <option value="1">Paciente</option>
                   <option value="2">Completo</option>
                   <option value="3">Estandar</option>
                   <option value="4">Gold</option>

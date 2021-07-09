@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ClinicasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +39,7 @@ Route::get('categorias' , 'App\Http\Controllers\CategoriasController@index');
 //clinica
 Route::post('storeClinicas' , 'App\Http\Controllers\ClinicasController@storeApi')->middleware('auth:sanctum');
 Route::get('showApiClinicas/{id}' , 'App\Http\Controllers\ClinicasController@showApi')->middleware('auth:sanctum');
+Route::get('image/{filename}', 'App\Http\Controllers\ClinicasController@getPubliclyStorgeFile');
 //sucursal
 Route::get('showApiSucursales/{id}' , 'App\Http\Controllers\SucursalesController@showApi')->middleware('auth:sanctum');
 Route::post('storeSucursal' , 'App\Http\Controllers\SucursalesController@storeApi')->middleware('auth:sanctum');

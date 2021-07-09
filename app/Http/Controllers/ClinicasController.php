@@ -187,4 +187,11 @@ class ClinicasController extends Controller
     {
         return Clinicas::where("userId", $id)->get();
     }
+
+    public function getPubliclyStorgeFile($filename)
+    {    
+        $url = asset('storage/logos/'.$filename);
+        return $url;
+
+    }	
 }
